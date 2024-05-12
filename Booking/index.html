@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" type="text/css" rel="stylesheet" />
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <head>
+        
+    <title>BOOKING</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">BOOKING</h1>       
+        <form action="index.php" method="post">
+            <div class="form-group">
+                <label for="customerName">Name:</label>
+                <input type="text" class="form-control" id="customerName" name="customerName" required>
+            </div>
+            <div class="form-group">
+                <label for="tourId">Select:</label>
+                <select class="form-control" id="tourId" name="tourId" required>
+                    <option value="1">Tour A</option>
+                    <option value="2">Tour B</option>
+                    <!-- Thêm các tùy chọn khác tại đây -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="adult_tickets">Adult (18+ age):</label>
+                <input type="number" id="adult_tickets" name="adult_tickets" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="youth_tickets">Youth (13-17 age):</label>
+                <input type="number" id="youth_tickets" name="youth_tickets" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="children_tickets">Children (0-12 age):</label>
+                <input type="number" id="children_tickets" name="children_tickets" min="0" required>
+            </div>
+            <label>Time:</label>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="time_12" name="tour_time" value="12:00" required>
+                <label class="form-check-label" for="time_12">12:00</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="time_17" name="tour_time" value="17:00" required>
+                <label class="form-check-label" for="time_17">17:00</label>
+            </div>
+            <div class="form-group">
+                <label for="startDate">Start-Date:</label>
+                <input type="date" class="form-control" id="startDate" name="startDate" required>
+            </div>
+            <div class="form-group">
+                <label for="endDate">End-Date:</label>
+                <input type="date" class="form-control" id="endDate" name="endDate" required>
+            </div>
+            <br>
+            <div id="shopping-cart">
+                <div class="txt-heading">
+                    <a id="btnEmpty" href="index.php?action=empty"><img src="empty-cart.png" alt="empty-cart" title="Empty Cart" class="float-right" /></a>
+                    <div class="cart-status">
+                        <div class="form-group">
+                            <label for="qsuantity">Total Quantity:</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" readonly>
+                        </div>
+                        <div>Total Price: $<span id="total-price">0</span></div>
+                    </div>
+                </div>
+            </div> 
+            <button type="submit" class="btn btn-primary">Book</button>
+        </form>
+        
+    </div>
+
+    <script>
+        const adultInput = document.getElementById('adult_tickets');
+        const youthInput = document.getElementById('youth_tickets');
+        const childrenInput = document.getElementById('children_tickets');
+        const totalInput = document.getElementById('quantity');
+    
+        adultInput.addEventListener('input', updateTotal);
+        youthInput.addEventListener('input', updateTotal);
+        childrenInput.addEventListener('input', updateTotal);
+    
+        function updateTotal() {
+            const adultCount = parseInt(adultInput.value) || 0;
+            const youthCount = parseInt(youthInput.value) || 0;
+            const childrenCount = parseInt(childrenInput.value) || 0;
+    
+            // Giá tiền cho từng loại vé (đơn vị là $)
+            const adultPrice = 100;
+            const youthPrice = 70;
+            const childrenPrice = 50;
+    
+            // Tính tổng giá tiền
+            let totalCost = adultCount * adultPrice + youthCount * youthPrice + childrenCount * childrenPrice;
+    
+            // Kiểm tra khoảng thời gian
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            const oneDay = 24 * 60 * 60 * 1000; // Số mili giây trong 1 ngày
+    
+            if ((endDate - startDate) / oneDay > 1) {
+                // Nếu end-date cách start-date hơn 1 ngày, thêm 30%
+                totalCost *= 1.3;
+            }
+    
+            totalInput.value = totalCost.toFixed(2); // Làm tròn đến 2 chữ số thập phân
+        }
+    </script>
+
+</body>
+</html>

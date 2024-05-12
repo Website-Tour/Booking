@@ -1,0 +1,53 @@
+{
+  "bookings": [
+    {
+      "name": "Tour A",
+      "tour_id": 123,
+      "cart_id": 101,
+      "image": "tour-images/halongbay.jpg",
+      "quantity": 2,
+      "price": 10000000,
+      "member_id": 456
+    },
+    
+    {
+      "name": "Tour B",
+      "tour_id": 124,
+      "cart_id": 102,
+      "image": "tour-images/halongbay2.jpg",
+      "quantity": 3,
+      "price": 13000000,
+      "member_id": 780
+    },
+
+    {
+      "name": "Tour C",
+      "tour_id": 125,
+      "cart_id": 103,
+      "image": "tour-images/halongbay3.jpg",
+      "quantity": 3,
+      "price": 15000000,
+      "member_id": 781
+    },
+
+    {
+      "name": "Tour D",
+      "tour_id": 126,
+      "cart_id": 104,
+      "image": "tour-images/halongbay4.jpg",
+      "quantity": 4,
+      "price": 25000000,
+      "member_id": 782
+    },
+
+    {
+      "name": "Tour E",
+      "tour_id": 127,
+      "cart_id": 105,
+      "image": "tour-images/halongbay5.jpg",
+      "quantity": 3,
+      "price": 18000000,
+      "member_id": 785
+    }
+  ]
+}
